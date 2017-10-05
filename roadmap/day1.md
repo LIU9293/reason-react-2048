@@ -10,7 +10,7 @@ Use the [reason-scripts](https://github.com/reasonml-community/reason-scripts), 
 ### First class files
 Let's look inside index.re:
 
-`OCaml
+```Ocaml
     [%bs.raw {|require('./index.css')|}];
 
     external register_service_worker : unit => unit = "default" [@@bs.module "./registerServiceWorker"];
@@ -19,12 +19,13 @@ Let's look inside index.re:
 
     register_service_worker ();
 
-`
+```
+
 There are no `import` or `export` actually, modules are shared by default, using the file name.(If you are familiar with React Native, RN has a `/* provideModule name */` way to make the build tool know it globally, Facebook style~).
 
 But I find that files only under `src/` folder can be accessed, but files under `components/` folder cannot. After some search, that's caused be `bsconfig.json`(aka: BuckleScript Config) file. You must provide exactly what folders you want to use. And just change as following will be fine:
 
-`JSON
+```JSON
     "sources": [{
       "dir": "src",
       "subdirs": [
@@ -32,4 +33,4 @@ But I find that files only under `src/` folder can be accessed, but files under 
         "containers"
       ]
     }]
-`
+```
