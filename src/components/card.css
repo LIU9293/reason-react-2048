@@ -1,0 +1,68 @@
+.card {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  height: 59.5px;
+  width: 59.5px;
+  border-radius: 3px;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 59.5px;
+  text-align: center;
+  color: white;
+  background-color: transparent;
+  color: #776e65;
+}
+
+.card_number_2 {
+  background: #eee4da;
+}
+
+.card_number_4 {
+  background: #ede0c8;
+}
+
+.card_number_8 {
+  color: #f9f6f2;
+  background: #f2b179;
+}
+
+.card_number_16 {
+  color: #f9f6f2;
+  background: #f59563;
+}
+
+.card_number_32 {
+  color: #f9f6f2;
+  background: #f67c5f;
+}
+
+.card_number_64 {
+  color: #f9f6f2;
+  background: #f65e3b;
+}
+
+.card_number_128 {
+  color: #f9f6f2;
+  background: #edcf72;
+}
+
+.card_number_256 {
+  color: #f9f6f2;
+  background: #edcc61;
+}
+
+.card_number_512 {
+  color: #f9f6f2;
+  background: #edc850;
+}
+
+.card_number_1024 {
+  color: #f9f6f2;
+  background: #edc53f;
+}
+
+.card_number_2048 {
+  color: #f9f6f2;
+  background: #edc22e;
+}

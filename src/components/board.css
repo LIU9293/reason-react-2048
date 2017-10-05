@@ -1,0 +1,26 @@
+.board {
+  width: 280px;
+  height: 280px;
+  padding: 10px;
+  touch-action: none;
+  border-radius: 6px;
+  background: #bbada0;
+}
+
+.row {
+  margin-bottom: 10px;
+  height: 57.5px;
+}
+
+.row :last-child {
+  margin-right: 0;
+}
+
+.cell {
+  width: 57.5px;
+  height: 57.5px;
+  margin-right: 10px;
+  float: left;
+  border-radius: 3px;
+  background: rgba(238, 228, 218, 0.35);
+}
