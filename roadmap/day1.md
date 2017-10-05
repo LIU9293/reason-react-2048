@@ -4,10 +4,12 @@ After some struggling, a easy static UI finally realize, and let's dive into thi
 ***
 
 ### Folder Structure
-<img src="https://github.com/LIU9293/reason-react-2048/raw/master/roadmap/day1_folder_structure.png" style="float: left" />
-<p style="float: right">
+<img src="https://github.com/LIU9293/reason-react-2048/raw/master/roadmap/day1_folder_structure.png" style="float: left">
+<span style="float: right">
 Use the <a href="https://github.com/reasonml-community/reason-scripts">reason-scripts</a>, a tool just like create-react-app, we can easily setup a project easily without concerning about build configuration or some tough things. And I am very used to have a <b>components</b> folder for stateless UI components as well as a <b>containers</b> folder for business logic part. So far so good.
-</p>
+</span>
+</img>
+
 
 ### First class files
 Let's look inside index.re:
