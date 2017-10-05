@@ -1,10 +1,10 @@
-![day1]('https://github.com/LIU9293/reason-react-2048/raw/master/roadmap/day1_static_markup.png')
+![day1](https://github.com/LIU9293/reason-react-2048/raw/master/roadmap/day1_static_markup.png)
 
 After some struggling, a easy static UI finally realize, and let's dive into this!
 ***
 
 ### Folder Structure
-![folder]('https://github.com/LIU9293/reason-react-2048/raw/master/roadmap/day1_folder_structure.png')
+<img src="https://github.com/LIU9293/reason-react-2048/raw/master/roadmap/day1_folder_structure.png" style="float: left" />
 Use the [reason-scripts](https://github.com/reasonml-community/reason-scripts), a tool just like create-react-app, we can easily setup a project easily without concerning about build configuration or some tough things. And I am very used to have a **components** folder for stateless UI components as well as a **containers** folder for business logic part. So far so good.
 
 ### First class files
