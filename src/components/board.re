@@ -20,7 +20,7 @@ let make _children => {
   };
   {
     ...component,
-    render: fun self => {
+    render: fun _self => {
       let rows = {
         Array.mapi
           (fun index _ =>
@@ -30,8 +30,10 @@ let make _children => {
           )
           [|1, 2, 3, 4|]
       };
-      <div className="board">
-        (ReasonReact.arrayToElement rows)
+      <div className="game-area">
+        <div className="board">
+          (ReasonReact.arrayToElement rows)
+        </div>
       </div>
     }
   }
