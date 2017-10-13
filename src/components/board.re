@@ -1,14 +1,8 @@
 [%bs.raw {|require('./board.css')|}];
 
 let component = ReasonReact.statelessComponent "Board";
-let originaState = [|
-  [|0, 0, 0, 0|],
-  [|0, 2, 0, 0|],
-  [|0, 0, 2, 0|],
-  [|0, 0, 0, 0|]
-|];
 
-let make _children => {
+let make ::board _children => {
   let renderCells = fun cellArray => {
     Array.mapi
       (fun index value =>
@@ -25,7 +19,7 @@ let make _children => {
         Array.mapi
           (fun index _ =>
             <div className="row" key=(string_of_int index)>
-              (ReasonReact.arrayToElement (renderCells originaState.(index)))
+              (ReasonReact.arrayToElement (renderCells board.(index)))
             </div>
           )
           [|1, 2, 3, 4|]

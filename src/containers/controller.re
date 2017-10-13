@@ -1,48 +1,77 @@
-
 type action =
-  | OnTouchStart ReactEventRe.Touch.t
-  | OnTouchEnd ReactEventRe.Touch.t;
+  | UserEvent EventLayer.movement
+  | AddRandomCards;
 
 type state = {
-  startX: int,
-  startY: int
+  board: array (array int)
+};
+
+let addSame = fun (array: array int) : array int => {
+  let len = Array.length array;
+  Js.log len;
+  if (len === 4 && array.(0) === array.(1) && array.(2) === array.(3)) {
+    [| array.(0) * 2, array.(2) * 2 |]
+  } else {
+    for i in 0 to 3 {
+      if (array.(i) === array.(i + 1)) {
+        Array.append
+          Array.sub (array 0 i)
+          [| array[i] * 2 |]
+          Array.sub (array i + 2)
+      } else {
+        array
+      };
+    };
+  };
+  /* for i in 0 to 3 {
+    if (array.(i) === array.(i + 1)) {
+      a = Array.concat
+            Array.sub (array 0 i)
+            [| array[i] * 2 |]
+            Array.sub (array i + 2)
+    };
+  }; */
+
 };
 
 let component = ReasonReact.reducerComponent "Controller";
 
-let onGuesture = fun (gusture) => {
-  Js.log gusture;
-};
-
 let make _children => {
   ...component,
   initialState: fun () => {
-    startX: 0,
-    startY: 0
+    board: [|
+      [|0, 0, 0, 0|],
+      [|0, 2, 0, 0|],
+      [|0, 0, 2, 0|],
+      [|0, 0, 0, 0|]
+    |]
   },
   reducer: fun action state =>
     switch action {
-    | OnTouchStart event => {
-        ReactEventRe.Touch.persist event;
-        let nativeEvent = ReactEventRe.Touch.nativeEvent event;
-        Js.log nativeEvent;
-        ReactEventRe.Touch.persist event;
-        ReasonReact.NoUpdate
+    | UserEvent movement => {
+        switch movement {
+          | Up => {
+              Js.log (addSame [| 2, 2, 4, 4 |]);
+              ReasonReact.NoUpdate
+            }
+          | Down => ReasonReact.NoUpdate
+          | Right => ReasonReact.NoUpdate
+          | Left => ReasonReact.NoUpdate
+          | None => ReasonReact.NoUpdate
+        }
       }
-    | OnTouchEnd event => {
-        Js.log (ReactDOMRe.domElementToObj (ReactEventRe.Touch.target event));
+    | AddRandomCards => {
         ReasonReact.NoUpdate
       }
     },
   render: fun self =>
     <EventLayer
       className="App"
-      onGuesture=onGuesture
+      onGuesture=(self.reduce (fun movement => UserEvent movement))
     >
       <div className="App-header">
         <h2> (ReasonReact.stringToElement "ReasonReact 2048") </h2>
       </div>
-      <div> (ReasonReact.stringToElement (string_of_int self.state.startY)) </div>
-      <Board />
+      <Board board=self.state.board />
     </EventLayer>
 };

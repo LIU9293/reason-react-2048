@@ -7,6 +7,13 @@ type event = {
   mutable timestampEnd: int
 };
 
+type movement =
+  | Up
+  | Down
+  | Right
+  | Left
+  | None;
+
 let eventRecorder = {
   startX: 0,
   startY: 0,
@@ -16,25 +23,25 @@ let eventRecorder = {
   timestampEnd: 0
 };
 
-let getGusture = fun () :string => {
-  let gusture = ref "none";
+let getGusture = fun () :movement => {
+  let gusture = ref None;
   let min = 4000;
   let { startX, startY, endX, endY, timestampStart, timestampEnd } = eventRecorder;
   let speedDown = (endY - startY) * 10000 / (timestampEnd - timestampStart);
   let speedRight = (endX - startX) * 10000 / (timestampEnd - timestampStart);
   if ((speedDown > 0 ? speedDown : -speedDown) > (speedRight > 0 ? speedRight : -speedRight)) {
     if ( speedDown - min > 0) {
-      gusture := "down";
+      gusture := Down;
     };
     if ( speedDown + min < 0) {
-      gusture := "up";
+      gusture := Up;
     };
   } else {
     if ( speedRight - min > 0 ) {
-      gusture := "right";
+      gusture := Right;
     };
     if ( speedRight + min < 0 ) {
-      gusture := "left";
+      gusture := Left;
     };
   };
   !gusture
