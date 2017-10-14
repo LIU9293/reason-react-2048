@@ -22,10 +22,10 @@ div {
 .App {
   text-align: center;
   height: 100%;
+  background-color: #495057;
 }
 
 .App-header {
-  background-color: #495057;
   padding: 40px;
   color: #f1f3f5;
 }

@@ -30,15 +30,11 @@ let clearZero (array: array int) :array int => {
 };
 
 let fillZero (array: array int) :array int => {
-  let final = [|0, 0, 0, 0|];
-  let len = Array.length array;
-  for i in 0 to 3 {
-    if (i < len) {
-      final.(i) = array.(i)
-    }
-  };
-  final
+  Array.append array (Array.make (4 - Array.length array) 0)
 };
+
+let fillZeroLeft (array: array int) :array int =>
+  Array.append (Array.make (4 - Array.length array) 0) array;
 
 let transformUp (board: array (array int)) :array (array int) => {
   let next = [|
@@ -97,14 +93,7 @@ let transformLeft (board: array (array int)) :array (array int) =>
   Array.map (fun value => fillZero (addSame (clearZero value))) board;
 
 let transformRight (board: array (array int)) :array (array int) =>
-  Array.map
-    (
-      fun value => {
-        let arr = fillZero (addSame (clearZero value));
-        Array.mapi (fun index _ => arr.(3 - index)) arr
-      }
-    )
-    board;
+  Array.map (fun value => fillZeroLeft (addSame (clearZero value))) board;
 
 let randomAddCard (board: array (array int)) :array (array int) => {
   let zeroLocationMap = ref [||];
