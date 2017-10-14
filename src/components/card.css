@@ -12,6 +12,7 @@
   color: white;
   background-color: transparent;
   color: #776e65;
+  transition: all 0.1s ease;
 }
 
 .card_number_2 {
