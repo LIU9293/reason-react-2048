@@ -29,9 +29,8 @@ let clearZero (array: array int) :array int => {
   !final
 };
 
-let fillZero (array: array int) :array int => {
-  Array.append array (Array.make (4 - Array.length array) 0)
-};
+let fillZero (array: array int) :array int =>
+  Array.append array (Array.make (4 - Array.length array) 0);
 
 let fillZeroLeft (array: array int) :array int =>
   Array.append (Array.make (4 - Array.length array) 0) array;
@@ -113,10 +112,20 @@ let randomAddCard (board: array (array int)) :array (array int) => {
       )
       board;
   let zeroLocationMapValue = !zeroLocationMap;
-  Random.init (Array.length zeroLocationMapValue);
+  Random.init [%bs.raw {|Math.random() * 10000|}];
   let random = Random.int (Array.length zeroLocationMapValue);
   let targetCell = zeroLocationMapValue.(random);
   let final = board;
   final.(targetCell.(0)).(targetCell.(1)) = 2;
   final
+};
+
+let initialBoard () => {
+  let board = [|
+    [|0, 0, 0, 0|],
+    [|0, 0, 0, 0|],
+    [|0, 0, 0, 0|],
+    [|0, 0, 0, 0|]
+  |];
+  randomAddCard (randomAddCard (randomAddCard board))
 };

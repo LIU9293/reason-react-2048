@@ -13,7 +13,7 @@ let component = ReasonReact.reducerComponent "Controller";
 let make _children => {
   ...component,
   initialState: fun () => {
-    board: [|[|2, 0, 0, 0|], [|0, 2, 0, 0|], [|2, 0, 2, 0|], [|0, 0, 0, 0|]|],
+    board: MoveLogic.initialBoard (),
     canUpdate: true,
     timerId: ref None
   },
@@ -65,9 +65,7 @@ let make _children => {
     <EventLayer
       className="App"
       onGuesture=(self.reduce (fun movement => UserEvent movement))>
-      <div className="App-header">
-        <h2> (ReasonReact.stringToElement "ReasonReact 2048") </h2>
-      </div>
+      <TitleArea />
       <Board board=self.state.board />
     </EventLayer>
 };

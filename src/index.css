@@ -20,13 +20,13 @@ div {
 }
 
 .App {
-  text-align: center;
   height: 100%;
   background-color: #495057;
 }
 
 .App-header {
   padding: 40px;
+  margin: auto;
   color: #f1f3f5;
 }
 
@@ -44,6 +44,6 @@ div {
 }
 
 .game-area {
-  margin: 50px auto 20px;
+  margin: 30px auto 20px;
   width: 280px;
 }
