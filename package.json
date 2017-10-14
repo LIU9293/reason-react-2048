@@ -3,11 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "gh-pages": "^1.0.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "reason-scripts": "0.6.11"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
@@ -17,5 +20,6 @@
   "devDependencies": {
     "bs-jest": "^0.1.0",
     "reason-react": "^0.2.4"
-  }
+  },
+  "homepage": "https://liu9293.github.io/reason-react-2048"
 }

@@ -1,4 +1,8 @@
 ### ReasonReact 2048 - An adventure into ReasonReact
+***
+
+### Demo - Use your mobile scan to play
+![QR](http://makeupforever.oss-cn-hangzhou.aliyuncs.com/qr.png)
 
 ### Motivation
 As a frontend developer using React for two years, I use JavaScript and React everyday: dive into new packages, fork and change some libraries, struggle with babel and webpack... But how can I get further, and become a good programmer I satisfied, maybe I need to get out of my comfort zone and do something really hard for me, like: A new language.
