@@ -7,7 +7,7 @@ let make _ => {
       <p>
         (ReasonReact.stringToElement "Touch (mobile) / Arrow Keys (Desktop)")
       </p>
-      (ReasonReact.stringToElement "made with Reason by ")
+      (ReasonReact.stringToElement "Made with Reason by ")
       <a href="https://github.com/LIU9293" className="github_link">
         (ReasonReact.stringToElement "liu kai")
       </a>

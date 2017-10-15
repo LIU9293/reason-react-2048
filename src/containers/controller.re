@@ -22,7 +22,7 @@ let component = ReasonReact.reducerComponent "Controller";
 
 let make _children => {
   ...component,
-  initialState: fun _ => {...getInitState, failure: true},
+  initialState: fun _ => getInitState,
   reducer: fun action state =>
     switch action {
     | UserEvent movement =>
