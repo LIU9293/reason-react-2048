@@ -6,7 +6,6 @@ let make ::failure ::totalScore ::highestScore ::onReplay _ => {
   ...component,
   render: fun _self =>
     if failure {
-      Js.log "end !!!!!";
       <div className="end_layer">
         <div className="message">
           (
@@ -41,7 +40,7 @@ let make ::failure ::totalScore ::highestScore ::onReplay _ => {
           </a>
         </div>
         <div className="replay">
-          <button className="replay-button" onClick=onReplay>
+          <button className="replay-button" id="replay" onClick=onReplay>
             (ReasonReact.stringToElement "Try again")
           </button>
         </div>

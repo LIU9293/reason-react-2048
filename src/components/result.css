@@ -11,16 +11,17 @@
   flex-direction: column;
   padding: 0 0 0 20px;
   text-align: center;
-  animation: showUp 0.2s forwards ease;
-  animation-delay: 1s;
+  animation: showUp 0.3s forwards ease;
 }
 
 @keyframes showUp {
   from {
     transform: scale(0);
+    opacity: 0;
   }
   to {
     transform: scale(1);
+    opacity: 1;
   }
 }
 

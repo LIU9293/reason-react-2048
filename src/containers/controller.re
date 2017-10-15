@@ -13,7 +13,7 @@ type state = {
 
 let getInitState = {
   board: MoveLogic.initialBoard (),
-  canUpdate: true,
+  canUpdate: false,
   timerId: ref None,
   failure: false
 };
@@ -22,7 +22,7 @@ let component = ReasonReact.reducerComponent "Controller";
 
 let make _children => {
   ...component,
-  initialState: fun _ => getInitState,
+  initialState: fun _ => {...getInitState, failure: true},
   reducer: fun action state =>
     switch action {
     | UserEvent movement =>
@@ -77,7 +77,9 @@ let make _children => {
     let totalScore = MoveLogic.getTotalScore state.board;
     let highestScore = MoveLogic.getHighestScore state.board;
     <EventLayer
-      className="App" onGuesture=(reduce (fun movement => UserEvent movement))>
+      onReplay=(reduce (fun _ => Restart))
+      className="App"
+      onGuesture=(reduce (fun movement => UserEvent movement))>
       <TitleArea totalScore highestScore />
       <Board board=state.board />
       <Notice />
