@@ -96,6 +96,8 @@ let transformRight (board: array (array int)) :array (array int) =>
 
 let randomAddCard (board: array (array int)) :array (array int) => {
   let zeroLocationMap = ref [||];
+  let random = ref 0;
+  let nextCard = [|2, 2, 4, 2, 2|];
   let u =
     Array.mapi
       (
@@ -112,12 +114,21 @@ let randomAddCard (board: array (array int)) :array (array int) => {
       )
       board;
   let zeroLocationMapValue = !zeroLocationMap;
-  Random.init [%bs.raw {|Math.random() * 10000|}];
-  let random = Random.int (Array.length zeroLocationMapValue);
-  let targetCell = zeroLocationMapValue.(random);
-  let final = board;
-  final.(targetCell.(0)).(targetCell.(1)) = 2;
-  final
+  if (Array.length zeroLocationMapValue === 0) {
+    board
+  } else {
+    Random.init [%bs.raw {|Math.random() * 10000|}];
+    if (Array.length zeroLocationMapValue <= 1) {
+      random := 0
+    } else {
+      random := Random.int (Array.length zeroLocationMapValue - 1)
+    };
+    let targetCell = zeroLocationMapValue.(!random);
+    let final = board;
+    let nextRandomNumber = nextCard.(Random.int 4);
+    final.(targetCell.(0)).(targetCell.(1)) = nextRandomNumber;
+    final
+  }
 };
 
 let initialBoard () => {
@@ -128,4 +139,58 @@ let initialBoard () => {
     [|0, 0, 0, 0|]
   |];
   randomAddCard (randomAddCard (randomAddCard board))
+};
+
+let getTotalScore (board: array (array int)) :int => {
+  let total = ref 0;
+  for i in 0 to 3 {
+    for j in 0 to 3 {
+      total := !total + board.(i).(j)
+    }
+  };
+  !total
+};
+
+let getHighestScore (board: array (array int)) :int => {
+  let highest = ref 0;
+  for i in 0 to 3 {
+    for j in 0 to 3 {
+      if (!highest < board.(i).(j)) {
+        highest := board.(i).(j)
+      }
+    }
+  };
+  !highest
+};
+
+let noZero (board: array (array int)) :bool => {
+  let final = ref true;
+  for i in 0 to 3 {
+    for j in 0 to 3 {
+      if (board.(i).(j) === 0) {
+        final := false
+      }
+    }
+  };
+  !final
+};
+
+let testFailure (board: array (array int)) :bool => {
+  let final = ref true;
+  if (noZero board) {
+    for i in 0 to 3 {
+      for j in 0 to 2 {
+        if (board.(i).(j) === board.(i).(j + 1)) {
+          final := false
+        } else if (
+          board.(j).(i) === board.(j + 1).(i)
+        ) {
+          final := false
+        }
+      }
+    };
+    !final
+  } else {
+    false
+  }
 };

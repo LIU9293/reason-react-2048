@@ -1,22 +1,28 @@
 type action =
   | UserEvent EventLayer.movement
+  | Failure
+  | Restart
   | AddRandomCards;
 
 type state = {
   board: array (array int),
   canUpdate: bool,
-  timerId: ref (option Js.Global.timeoutId)
+  timerId: ref (option Js.Global.timeoutId),
+  failure: bool
+};
+
+let getInitState = {
+  board: MoveLogic.initialBoard (),
+  canUpdate: true,
+  timerId: ref None,
+  failure: false
 };
 
 let component = ReasonReact.reducerComponent "Controller";
 
 let make _children => {
   ...component,
-  initialState: fun () => {
-    board: MoveLogic.initialBoard (),
-    canUpdate: true,
-    timerId: ref None
-  },
+  initialState: fun _ => getInitState,
   reducer: fun action state =>
     switch action {
     | UserEvent movement =>
@@ -53,19 +59,34 @@ let make _children => {
         board: MoveLogic.randomAddCard state.board,
         canUpdate: false
       }
+    | Failure => ReasonReact.Update {...state, canUpdate: false, failure: true}
+    | Restart => ReasonReact.Update getInitState
     },
   didUpdate: fun {newSelf} =>
-    if newSelf.state.canUpdate {
+    if (MoveLogic.testFailure newSelf.state.board && newSelf.state.canUpdate) {
+      newSelf.state.timerId :=
+        Some (Js.Global.setTimeout (newSelf.reduce (fun _ => Failure)) 0)
+    } else if
+      newSelf.state.canUpdate {
       newSelf.state.timerId :=
         Some (
-          Js.Global.setTimeout (newSelf.reduce (fun _ => AddRandomCards)) 150
+          Js.Global.setTimeout (newSelf.reduce (fun _ => AddRandomCards)) 100
         )
     },
-  render: fun self =>
+  render: fun {state, reduce} => {
+    let totalScore = MoveLogic.getTotalScore state.board;
+    let highestScore = MoveLogic.getHighestScore state.board;
     <EventLayer
-      className="App"
-      onGuesture=(self.reduce (fun movement => UserEvent movement))>
-      <TitleArea />
-      <Board board=self.state.board />
+      className="App" onGuesture=(reduce (fun movement => UserEvent movement))>
+      <TitleArea totalScore highestScore />
+      <Board board=state.board />
+      <Notice />
+      <Result
+        failure=state.failure
+        totalScore
+        highestScore
+        onReplay=(reduce (fun _ => Restart))
+      />
     </EventLayer>
+  }
 };

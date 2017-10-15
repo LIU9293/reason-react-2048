@@ -1,0 +1,61 @@
+.end_layer {
+  position: fixed;
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  left: 0;
+  top: 0;
+  background-color: rgba(73, 80, 87, 1);
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 0 0 0 20px;
+  text-align: center;
+  animation: showUp 0.2s forwards ease;
+  animation-delay: 1s;
+}
+
+@keyframes showUp {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.message {
+  font-size: 30px;
+  margin: 20px 0 20px 0;
+  color: #f8f9fa;
+}
+
+.to_github {
+  margin: 20px auto;
+}
+
+.github_link {
+  appearance: none;
+  color: #c5f6fa;
+}
+
+.replay {
+  margin: 20px auto;
+}
+
+.center {
+  justify-content: center;
+  margin: 0 20px !important;
+}
+
+.replay-button {
+  width: 120px;
+  height: 40px;
+  background: #f1f3f5;
+  border-radius: 3px;
+  color: #495057;
+  appearance: none;
+  box-shadow: none;
+  border: none;
+  font-size: 13px;
+}
