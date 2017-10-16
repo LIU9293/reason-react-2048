@@ -3,7 +3,7 @@
 # ReasonReact 2048 - An adventure into ReasonReact
 > Demo - The app is designed to play in mobile phones, use your mobile scan to play, or you can click [here](https://liu9293.github.io/reason-react-2048/) to try in desktop anyway.
 
-<img src="https://raw.githubusercontent.com/LIU9293/reason-react-2048/master/demo.webm" align="center" />
+<img src="https://raw.githubusercontent.com/LIU9293/reason-react-2048/master/demo.gif" align="center" />
 
 ## Motivation
 As a frontend developer using React for two years, I use JavaScript and React everyday: dive into new packages, fork and change some libraries, struggle with babel and webpack... But how can I get further, and become a good programmer I satisfied, maybe I need to get out of my comfort zone and do something really hard for me, like: A new language.
