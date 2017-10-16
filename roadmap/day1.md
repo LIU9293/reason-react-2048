@@ -37,7 +37,7 @@ But I find that files only under `src/` folder can be accessed, but files under 
 
 ### React Component in Reason
 So, we will have a `board` component, which is the main board and contains serval cards(tiles), and a `card` component, the card is really easy, following the [offcial guide](https://reasonml.github.io/reason-react/docs/en/creation-props-self.html), we just need a value prop and return a `div` contains a number. But at this time, you should take care because Reason is strong typed, so you cannot just add a string with a number anymore, you need something like `string_of_int`.
-```ReasonML
+```OCaml
 let component = ReasonReact.statelessComponent "Card";
 
 let make ::value  _ => {
@@ -54,7 +54,7 @@ let make ::value  _ => {
 ```
 
 The one more difficult is the `board`, now I just want to pass a matrix and the board just show me the correct cards, the code looks like following:
-```ReasonML
+```OCaml
 let component = ReasonReact.statelessComponent "Board";
 let originaState = [|
   [|0, 0, 0, 0|],
@@ -64,15 +64,17 @@ let originaState = [|
 |];
 
 let make _children => {
-  let renderCells = fun cellArray => {
+  // the function takes in an array of int, output an array of React Component
+  let renderCells = fun row => {
     Array.mapi
       (fun index value =>
         <div className="cell" key=(string_of_int index)>
           <Card value=value />
         </div>
       )
-      cellArray
+      row
   };
+  // below is the return, no return keyword here, just don't add ';'
   {
     ...component,
     render: fun _self => {
