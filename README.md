@@ -2,7 +2,7 @@
 
 # ReasonReact 2048 - An adventure into ReasonReact
 > Demo - The app is designed to play in mobile phones, use your mobile scan to play, or you can click [here](https://liu9293.github.io/reason-react-2048/) to try in desktop anyway.
-### 
+***
 
 <p align="center">
 <img width=40% src="https://raw.githubusercontent.com/LIU9293/reason-react-2048/master/demo.gif">
