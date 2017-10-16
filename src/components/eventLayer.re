@@ -60,22 +60,15 @@ let getGusture () :movement => {
 
 let component = ReasonReact.statelessComponent "EventLayer";
 
-let make ::className=? ::onGuesture ::onReplay children => {
+let make ::className=? ::onGuesture children => {
   let onTouchStart event => {
-    ReactEventRe.Touch.preventDefault event;
     let touch = (ReactEventRe.Touch.nativeEvent event)##targetTouches;
-    let target =
-      ReactDOMRe.domElementToObj (ReactEventRe.Touch.nativeEvent event)##target;
-    if (target##id === "replay") {
-      onReplay ()
-    } else {
-      eventRecorder.startX = touch.(0)##screenX;
-      eventRecorder.startY = touch.(0)##screenY;
-      eventRecorder.timestampStart = [%bs.raw {|new Date().getTime()|}]
-    }
+    let target = ReactDOMRe.domElementToObj (ReactEventRe.Touch.nativeEvent event)##target;
+    eventRecorder.startX = touch.(0)##screenX;
+    eventRecorder.startY = touch.(0)##screenY;
+    eventRecorder.timestampStart = [%bs.raw {|new Date().getTime()|}]
   };
   let onTouchEnd event => {
-    ReactEventRe.Touch.preventDefault event;
     let touch = (ReactEventRe.Touch.nativeEvent event)##changedTouches;
     eventRecorder.endX = touch.(0)##screenX;
     eventRecorder.endY = touch.(0)##screenY;
@@ -100,6 +93,9 @@ let make ::className=? ::onGuesture ::onReplay children => {
       onGuesture None
     }
   };
+  let onTouchMove event => {
+    ReactEventRe.Touch.preventDefault event;
+  };
   {
     ...component,
     didMount: fun _ => {
@@ -110,6 +106,7 @@ let make ::className=? ::onGuesture ::onReplay children => {
       ReasonReact.createDomElement
         "div"
         props::{
+          "onTouchMove": onTouchMove,
           "onTouchStart": onTouchStart,
           "onTouchEnd": onTouchEnd,
           "className": className

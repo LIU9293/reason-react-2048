@@ -77,7 +77,6 @@ let make _children => {
     let totalScore = MoveLogic.getTotalScore state.board;
     let highestScore = MoveLogic.getHighestScore state.board;
     <EventLayer
-      onReplay=(reduce (fun _ => Restart))
       className="App"
       onGuesture=(reduce (fun movement => UserEvent movement))>
       <TitleArea totalScore highestScore />
