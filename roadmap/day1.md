@@ -1,17 +1,17 @@
-![day1](https://github.com/LIU9293/reason-react-2048/raw/master/roadmap/day1_static_markup.png)
+<img src="https://github.com/LIU9293/reason-react-2048/raw/master/roadmap/day1_static_markup.png" align="center" width="50%" />
 
 After some struggling, a easy static UI finally realize, and let's dive into this!
 ***
 
 ### Folder Structure
-<img src="https://github.com/LIU9293/reason-react-2048/raw/master/roadmap/day1_folder_structure.png" style="margin: auto" />
+<img src="https://github.com/LIU9293/reason-react-2048/raw/master/roadmap/day1_folder_structure.png" align="center" width="60%" />
 
 Use the [reason-scripts](https://github.com/reasonml-community/reason-scripts), a tool just like create-react-app, we can easily setup a project easily without concerning about build configuration or some tough things. And I am very used to have a **components** folder for stateless UI components as well as a **containers** folder for business logic part. So far so good.
 
 ### First class files
 Let's look inside index.re:
 
-```ReasonML
+```OCaml
 [%bs.raw {|require('./index.css')|}];
 
 external register_service_worker : unit => unit = "default" [@@bs.module "./registerServiceWorker"];
