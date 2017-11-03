@@ -63,7 +63,6 @@ let component = ReasonReact.statelessComponent "EventLayer";
 let make ::className=? ::onGuesture children => {
   let onTouchStart event => {
     let touch = (ReactEventRe.Touch.nativeEvent event)##targetTouches;
-    let target = ReactDOMRe.domElementToObj (ReactEventRe.Touch.nativeEvent event)##target;
     eventRecorder.startX = touch.(0)##screenX;
     eventRecorder.startY = touch.(0)##screenY;
     eventRecorder.timestampStart = [%bs.raw {|new Date().getTime()|}]
